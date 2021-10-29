@@ -9,7 +9,26 @@ from app.models.deposit import Deposit
 router = APIRouter()
 
 
-@router.post("/", response_model=Dict)
+@router.post("/", 
+    responses={
+        200: {
+            "description": "Successful Response",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "28.02.2021": 10050,
+                        "31.03.2021": 10100.25,
+                        "30.04.2021": 10150.75,
+                        "31.05.2021": 10201.5,
+                        "30.06.2021": 10252.51,
+                        "31.07.2021": 10303.77,
+                        "31.08.2021": 10355.29
+                    }
+                }
+            },
+        },
+    },
+)
 def create_deposit(deposit: Deposit):
     list_deposit = dict()
 
