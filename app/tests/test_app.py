@@ -24,22 +24,27 @@ class TestApp:
         response = test_client.post("/deposit/", json=test_not_validate_date)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         data = response.json()
-        assert data["detail"] == "Incorrect data format, should be dd.mm.YYYY"
+        assert data["error"] == "Incorrect data format, should be dd.mm.YYYY"
 
-    def test_validate_deposit_periods(self, test_client, test_not_validate_periods):
-        response = test_client.post("/deposit/", json=test_not_validate_periods)
+    def test_validate_deposit_periods(self, test_client,
+                                      test_not_validate_periods):
+        response = test_client.post("/deposit/",
+                                    json=test_not_validate_periods)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         data = response.json()
-        assert data["detail"] == "Incorrect period, should be >= 1 and <= 60"
+        assert data["error"] == "Incorrect period, should be >= 1 and <= 60"
 
-    def test_validate_deposit_amount(self, test_client, test_not_validate_amount):
-        response = test_client.post("/deposit/", json=test_not_validate_amount)
+    def test_validate_deposit_amount(self, test_client,
+                                     test_not_validate_amount):
+        response = test_client.post("/deposit/",
+                                    json=test_not_validate_amount)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         data = response.json()
-        assert data["detail"] == "Incorrect amount, should be >= 10000 and <= 3000000"
+        assert data["error"] == "Incorrect amount, "\
+                                "should be >= 10000 and <= 3000000"
 
     def test_validate_deposit_rate(self, test_client, test_not_validate_rate):
         response = test_client.post("/deposit/", json=test_not_validate_rate)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         data = response.json()
-        assert data["detail"] == "Incorrect rate, should be >= 1 and <= 8"
+        assert data["error"] == "Incorrect rate, should be >= 1 and <= 8"
