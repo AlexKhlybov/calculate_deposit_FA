@@ -27,7 +27,7 @@ class Deposit(BaseModel):
             return v
         except ValueError:
             raise HTTPEror(error="Incorrect data format, "
-                                   "should be dd.mm.YYYY")
+                                 "should be dd.mm.YYYY")
 
     @validator("periods")
     def period_validate(cls, v):

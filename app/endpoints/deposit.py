@@ -28,8 +28,8 @@ router = APIRouter()
                  },
                  400: {
                     "model": HTTPError,
-                    "description": "Validation Error",
-                },
+                    "description": "Error: Bad Request",
+                 },
              },)
 def create_deposit(deposit: Deposit):
     list_deposit = dict()
